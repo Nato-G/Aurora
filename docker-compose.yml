@@ -1,0 +1,15 @@
+version: '3'
+services:
+  jenkins:
+    image: myjenkins
+    ports:
+      - "8080:8080"
+    user: root
+    volumes:
+      - aurora-volume:/var/jenkins_home
+    command: ["sh", "-c", "jenkins-plugin-cli --plugins pipeline-model-definition github-branch-source:1.9 && java -jar /usr/share/jenkins/jenkins.war"]
+volumes:
+  aurora-volume:
+    external: true
+
+
